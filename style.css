@@ -1,0 +1,21 @@
+/* Thème clair */
+body.light-theme {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+body.light-theme .list-group-item {
+    background-color: #fff;
+    color: #212529;
+}
+
+/* Thème sombre */
+body.dark-theme {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark-theme .list-group-item {
+    background-color: #495057;
+    color: #f8f9fa;
+}
