@@ -1,5 +1,6 @@
 body {
-  font-family: "Arial", sans-serif; /* Changer la police par défaut */
+  font-family: "Arial", sans-serif;
+  /* Changer la police par défaut */
 }
 
 /* Thème clair */
@@ -22,4 +23,64 @@ body.dark-theme {
 body.dark-theme .list-group-item {
   background-color: #495057;
   color: #f8f9fa;
+}
+
+/* Encadrer la fonction updateFinancialStatus */
+#financialStatus {
+  border: 1px solid #ced4da;
+  /* Bordure en gris */
+  padding: 10px;
+  /* Espacement intérieur */
+  margin-bottom: 20px;
+  /* Marge en bas */
+}
+
+/* Modifier le style du texte dans le cadre */
+#financialStatus {
+  font-family: "Arial", sans-serif;
+  /* Changer la police */
+  font-size: 16px;
+  /* Taille du texte */
+}
+
+/* Ajouter un fond de couleur légère pour le cadre */
+#financialStatus {
+  background-color: #f8f9fa;
+  /* Couleur de fond légère */
+}
+
+/* Style pour les modals en mode sombre */
+.dark-theme .modal-content {
+  background-color: #343a40;
+  color: #f8f9fa;
+  /* Couleur du texte en mode sombre */
+}
+
+.dark-theme .modal-header {
+  background-color: #343a40;
+  border-bottom: 1px solid #495057;
+  color: #f8f9fa;
+  /* Couleur du texte en mode sombre */
+}
+
+.dark-theme .modal-footer {
+  background-color: #343a40;
+  border-top: 1px solid #495057;
+  color: #f8f9fa;
+  /* Couleur du texte en mode sombre */
+}
+
+.dark-theme .close {
+  color: #f8f9fa;
+  /* Couleur de l'icône de fermeture en mode sombre */
+}
+
+/* Styles pour le mode sombre */
+.dark-theme #financialStatus {
+  border: 1px solid #495057;
+  /* Bordure en couleur sombre */
+  color: #f8f9fa;
+  /* Couleur du texte en mode sombre */
+  background-color: #343a40;
+  /* Couleur de fond sombre */
 }

@@ -5,7 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   const financialStatus = document.getElementById("financialStatus");
   const totalAmountDisplay = document.getElementById("totalAmount");
-
+  const transactionDetails = document.getElementById("transactionDetails");
+  const transactionModal = new bootstrap.Modal(
+    document.getElementById("transactionModal"),
+    {
+      keyboard: true,
+    }
+  );
   class Transaction {
     constructor(description, amount, type, category) {
       this.description = description;
@@ -18,37 +24,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function addTransaction(transaction, index) {
     const listItem = document.createElement("li");
-    listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+    listItem.className =
+      "list-group-item d-flex justify-content-between align-items-center";
     listItem.dataset.index = index;
 
+    // Formater le montant avec un point ou une virgule
+    const formattedAmount = transaction.amount.toLocaleString("fr-FR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
     const amountSpan = document.createElement("span");
-    amountSpan.textContent = `${transaction.amount} Fcfa`;
-    amountSpan.className = transaction.type === "income" ? "badge badge-success" : "badge badge-danger";
+    amountSpan.textContent = `${formattedAmount} Fcfa`; // Affichage du montant formaté
+    amountSpan.className =
+      transaction.type === "income"
+        ? "badge badge-success"
+        : "badge badge-danger";
 
     const detailDiv = document.createElement("div");
-    detailDiv.className = "d-flex flex-column justify-content-center align-items-start";
-
-    const dateSpan = document.createElement("span");
-    dateSpan.textContent = transaction.date;
-    dateSpan.className = "font-weight-bold";
-    detailDiv.appendChild(dateSpan);
+    detailDiv.className =
+      "d-flex flex-column justify-content-center align-items-start";
 
     const descriptionSpan = document.createElement("span");
     descriptionSpan.textContent = transaction.description;
     detailDiv.appendChild(descriptionSpan);
 
+    const dateWithoutTime = new Date(transaction.date).toLocaleDateString();
+    const dateSpan = document.createElement("span");
+    dateSpan.textContent = dateWithoutTime;
+    dateSpan.className = "font-weight-bold";
+    detailDiv.appendChild(dateSpan);
+
     const deleteButton = document.createElement("button");
     deleteButton.className = "btn btn-danger btn-sm ml-2";
-    deleteButton.innerHTML = '<i class="bi bi-trash"></i>'; // Remplacer le texte par l'icône trash
-    deleteButton.onclick = function () {
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteButton.onclick = function (event) {
+      event.stopPropagation();
       deleteTransaction(index);
     };
 
     listItem.appendChild(amountSpan);
     listItem.appendChild(detailDiv);
     listItem.appendChild(deleteButton);
+    listItem.onclick = function () {
+      showTransactionDetails(transaction);
+    };
 
     transactionList.appendChild(listItem);
+  }
+
+  function showTransactionDetails(transaction) {
+    transactionDetails.innerHTML = `
+      <p><strong>Description:</strong> ${transaction.description}</p>
+      <p><strong>Montant:</strong> ${transaction.amount} Fcfa</p>
+      <p><strong>Type:</strong> ${
+        transaction.type === "income" ? "Entrée" : "Dépense"
+      }</p>
+      <p><strong>Date:</strong> ${transaction.date}</p>
+    `;
+    transactionModal.show();
   }
 
   function updateFinancialStatus() {
@@ -56,9 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let financialStatusText = "";
 
     if (incomeTotal > expenseTotal) {
-      financialStatusText = `Vous êtes en gain de ${(((incomeTotal - expenseTotal) / incomeTotal) * 100).toFixed(2)}%`;
+      financialStatusText = `Vous êtes en gain de ${(
+        ((incomeTotal - expenseTotal) / incomeTotal) *
+        100
+      ).toFixed(2)}%`;
     } else if (incomeTotal < expenseTotal) {
-      financialStatusText = `Vous êtes en perte de ${(((expenseTotal - incomeTotal) / incomeTotal) * 100).toFixed(2)}%`;
+      financialStatusText = `Vous êtes en perte de ${(
+        ((expenseTotal - incomeTotal) / incomeTotal) *
+        100
+      ).toFixed(2)}%`;
     } else {
       financialStatusText = `Votre situation financière est équilibrée`;
     }
@@ -84,8 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateTotalAmount() {
     const { incomeTotal, expenseTotal } = calculateTotals();
-    const totalAmount = incomeTotal - expenseTotal;
-    totalAmountDisplay.textContent = `Montant total : ${totalAmount} Fcfa`;
+    const totalAmount = (incomeTotal - expenseTotal).toLocaleString("fr-FR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }); // Formatage du montant total
+    totalAmountDisplay.textContent = `Montant total : ${totalAmount} Fcfa`; // Affichage du montant total formaté
   }
 
   function validateAmount(amount) {
@@ -94,8 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function loadTransactions() {
     const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    transactionList.innerHTML = '';
-    transactions.forEach((transaction, index) => addTransaction(transaction, index));
+    transactionList.innerHTML = "";
+    transactions.forEach((transaction, index) =>
+      addTransaction(transaction, index)
+    );
     updateFinancialStatus();
     updateTotalAmount();
   }
@@ -116,8 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("transactions", JSON.stringify(transactions));
       loadTransactions();
     }
-}
-
+  }
 
   transactionForm.addEventListener("submit", function (event) {
     event.preventDefault();
