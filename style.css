@@ -25,6 +25,10 @@ body.dark-theme .list-group-item {
   color: #f8f9fa;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Encadrer la fonction updateFinancialStatus */
 #financialStatus {
   font-family: "Arial", sans-serif;

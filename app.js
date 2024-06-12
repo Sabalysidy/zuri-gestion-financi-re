@@ -6,12 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const financialStatus = document.getElementById("financialStatus");
   const totalAmountDisplay = document.getElementById("totalAmount");
   const transactionDetails = document.getElementById("transactionDetails");
+  const transactionContainer = document.getElementById("transactionContainer");
   const transactionModal = new bootstrap.Modal(
     document.getElementById("transactionModal"),
     {
       keyboard: true,
     }
   );
+
   class Transaction {
     constructor(description, amount, type, category) {
       this.description = description;
@@ -28,13 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
       "list-group-item d-flex justify-content-between align-items-center";
     listItem.dataset.index = index;
 
-    // Formater le montant avec un point ou une virgule
     const formattedAmount = transaction.amount.toLocaleString("fr-FR", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
     const amountSpan = document.createElement("span");
-    amountSpan.textContent = `${formattedAmount} Fcfa`; // Affichage du montant formaté
+    amountSpan.textContent = `${formattedAmount} Fcfa`;
     amountSpan.className =
       transaction.type === "income"
         ? "badge badge-success"
@@ -75,7 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function showTransactionDetails(transaction) {
     transactionDetails.innerHTML = `
       <p><strong>Description:</strong> ${transaction.description}</p>
-      <p><strong>Montant:</strong> ${transaction.amount} Fcfa</p>
+      <p><strong>Montant:</strong> ${transaction.amount.toLocaleString("fr-FR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })} Fcfa</p>
       <p><strong>Type:</strong> ${
         transaction.type === "income" ? "Entrée" : "Dépense"
       }</p>
@@ -128,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalAmount = (incomeTotal - expenseTotal).toLocaleString("fr-FR", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }); // Formatage du montant total
-    totalAmountDisplay.textContent = `Montant total : ${totalAmount} Fcfa`; // Affichage du montant total formaté
+    });
+    totalAmountDisplay.textContent = `Montant total : ${totalAmount} Fcfa`;
   }
 
   function validateAmount(amount) {
@@ -191,6 +195,15 @@ document.addEventListener("DOMContentLoaded", function () {
       body.classList.remove("light-theme");
       body.classList.add("dark-theme");
       themeToggle.className = "bi bi-sun";
+    }
+  });
+
+  // Ajouter un gestionnaire de défilement pour masquer le formulaire
+  transactionContainer.addEventListener("scroll", function () {
+    if (transactionContainer.scrollTop > 0) {
+      transactionForm.classList.add("hidden");
+    } else {
+      transactionForm.classList.remove("hidden");
     }
   });
 
