@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("salesForm");
   const salesTableBody = document.getElementById("salesTableBody");
   const chiffreAffaireDisplay = document.getElementById("chiffreAffaire");
-  const itemsPerPage = 2; // Nombre d'éléments à afficher par page
+  const itemsPerPage = 10; // Nombre d'éléments à afficher par page
   let currentPage = 1; // Page actuelle, initialisée à 1
 
   window.addEventListener("scroll", function () {

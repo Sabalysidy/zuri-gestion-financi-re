@@ -48,13 +48,17 @@ body.dark-theme .navbar a {
 }
 
 .light-theme .table {
-  color: #000; /* Couleur de texte noir pour le thème clair */
-  background-color: #fff; /* Fond blanc pour le thème clair */
+  color: #000;
+  /* Couleur de texte noir pour le thème clair */
+  background-color: #fff;
+  /* Fond blanc pour le thème clair */
 }
 
 .dark-theme .table {
-  color: #fff; /* Couleur de texte blanche pour le thème sombre */
-  background-color: #333; /* Fond foncé pour le thème sombre */
+  color: #fff;
+  /* Couleur de texte blanche pour le thème sombre */
+  background-color: #333;
+  /* Fond foncé pour le thème sombre */
 }
 
 .fixed-top {
@@ -78,6 +82,13 @@ body.dark-theme .navbar a {
   /* Espacement intérieur */
   margin-bottom: 20px;
   /* Marge en bas */
+}
+
+#chiffreAffaire {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
 }
 
 /* Style pour les modals en mode sombre */
