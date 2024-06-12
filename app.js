@@ -87,22 +87,24 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateFinancialStatus() {
     const { incomeTotal, expenseTotal } = calculateTotals();
     let financialStatusText = "";
+    let percentage = 0;
+    let icon = "";
 
-    if (incomeTotal > expenseTotal) {
-      financialStatusText = `Vous êtes en gain de ${(
-        ((incomeTotal - expenseTotal) / incomeTotal) *
-        100
-      ).toFixed(2)}%`;
-    } else if (incomeTotal < expenseTotal) {
-      financialStatusText = `Vous êtes en perte de ${(
-        ((expenseTotal - incomeTotal) / incomeTotal) *
-        100
-      ).toFixed(2)}%`;
-    } else {
-      financialStatusText = `Votre situation financière est équilibrée`;
+    if (incomeTotal > 0) {
+      percentage = ((incomeTotal - expenseTotal) / incomeTotal) * 100;
     }
 
-    financialStatus.textContent = financialStatusText;
+    if (incomeTotal === expenseTotal) {
+      financialStatusText = `Votre situation financière est équilibrée`;
+    } else if (percentage < 50) {
+      financialStatusText = `Vous êtes en perte de ${percentage.toFixed(2)}%`;
+      icon = `<i class="bi bi-arrow-down-circle" style="color: red;"></i>`;
+    } else {
+      financialStatusText = `Vous êtes en gain de ${percentage.toFixed(2)}%`;
+      icon = `<i class="bi bi-arrow-up-circle" style="color: green;"></i>`;
+    }
+
+    financialStatus.innerHTML = `${icon} ${financialStatusText}`;
   }
 
   function calculateTotals() {

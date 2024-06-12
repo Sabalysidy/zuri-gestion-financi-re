@@ -27,26 +27,18 @@ body.dark-theme .list-group-item {
 
 /* Encadrer la fonction updateFinancialStatus */
 #financialStatus {
+  font-family: "Arial", sans-serif;
+  /* Changer la police */
+  font-size: 16px;
+  /* Taille du texte */
+  background-color: #f8f9fa;
+  /* Couleur de fond légère */
   border: 1px solid #ced4da;
   /* Bordure en gris */
   padding: 10px;
   /* Espacement intérieur */
   margin-bottom: 20px;
   /* Marge en bas */
-}
-
-/* Modifier le style du texte dans le cadre */
-#financialStatus {
-  font-family: "Arial", sans-serif;
-  /* Changer la police */
-  font-size: 16px;
-  /* Taille du texte */
-}
-
-/* Ajouter un fond de couleur légère pour le cadre */
-#financialStatus {
-  background-color: #f8f9fa;
-  /* Couleur de fond légère */
 }
 
 /* Style pour les modals en mode sombre */
