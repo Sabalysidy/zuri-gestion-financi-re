@@ -25,8 +25,43 @@ body.dark-theme .list-group-item {
   color: #f8f9fa;
 }
 
+body.light-theme .navbar {
+  background-color: #f8f9fa !important;
+  color: #343a40 !important;
+}
+
+body.dark-theme .navbar {
+  background-color: #343a40 !important;
+  color: #f8f9fa !important;
+}
+
+body.light-theme .navbar a {
+  color: #343a40 !important;
+}
+
+body.dark-theme .navbar a {
+  color: #f8f9fa !important;
+}
+
 .hidden {
   display: none;
+}
+
+.light-theme .table {
+  color: #000; /* Couleur de texte noir pour le thème clair */
+  background-color: #fff; /* Fond blanc pour le thème clair */
+}
+
+.dark-theme .table {
+  color: #fff; /* Couleur de texte blanche pour le thème sombre */
+  background-color: #333; /* Fond foncé pour le thème sombre */
+}
+
+.fixed-top {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Encadrer la fonction updateFinancialStatus */

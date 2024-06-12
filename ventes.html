@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard des Ventes - Zuri Gestion Financière</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link rel="icon" href="img/zuri_market.jpg" type="image/png">
+</head>
+
+<body class="light-theme">
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Zuri Market</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ventes.html">Ventes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports.html">Rapports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">Paramètres</a>
+                </li>
+            </ul>
+            <i id="themeToggle" class="bi bi-moon" style="font-size: 1.5rem; cursor: pointer;"></i>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Dashboard des Ventes</h2>
+        <div id="chiffreAffaire" class="text-center mb-4 font-weight-bold"></div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="saleForm">
+                    <div class="form-group">
+                        <label for="productImage">Image du Produit:</label>
+                        <input type="file" class="form-control" id="productImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleAmount">Montant:</label>
+                        <input type="number" class="form-control" id="saleAmount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleDate">Date de Vente:</label>
+                        <input type="date" class="form-control" id="saleDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Numéro de Téléphone du Client:</label>
+                        <input type="tel" class="form-control" id="customerPhone" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 mt-4">
+                <h3>Historique des Ventes</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Image du Produit</th>
+                            <th>Montant</th>
+                            <th>Date de Vente</th>
+                            <th>Numéro de Téléphone du Client</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salesTableBody"></tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="text-center mt-3" id="paginationContainer">
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="theme.js"></script>
+        <script src="sales.js"></script>
+</body>
+
+</html>

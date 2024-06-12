@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const transactionForm = document.getElementById("transactionForm");
   const transactionList = document.getElementById("transactionList");
-  const themeToggle = document.getElementById("themeToggle");
-  const body = document.body;
   const financialStatus = document.getElementById("financialStatus");
   const totalAmountDisplay = document.getElementById("totalAmount");
   const transactionDetails = document.getElementById("transactionDetails");
@@ -15,11 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   class Transaction {
-    constructor(description, amount, type, category) {
-      this.description = description;
+    constructor(amount, type) {
       this.amount = parseFloat(amount);
       this.type = type;
-      this.category = category;
       this.date = new Date().toLocaleString();
     }
   }
@@ -45,9 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
     detailDiv.className =
       "d-flex flex-column justify-content-center align-items-start";
 
-    const descriptionSpan = document.createElement("span");
-    descriptionSpan.textContent = transaction.description;
-    detailDiv.appendChild(descriptionSpan);
+    const typeText = transaction.type === "income" ? "Dépôt" : "Retrait";
+    const typeSpan = document.createElement("span");
+    typeSpan.textContent = typeText;
+    detailDiv.appendChild(typeSpan);
 
     const dateWithoutTime = new Date(transaction.date).toLocaleDateString();
     const dateSpan = document.createElement("span");
@@ -74,15 +71,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showTransactionDetails(transaction) {
+    const typeText = transaction.type === "income" ? "Dépôt" : "Retrait";
     transactionDetails.innerHTML = `
-      <p><strong>Description:</strong> ${transaction.description}</p>
-      <p><strong>Montant:</strong> ${transaction.amount.toLocaleString("fr-FR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })} Fcfa</p>
-      <p><strong>Type:</strong> ${
-        transaction.type === "income" ? "Entrée" : "Dépense"
-      }</p>
+      <p><strong>Montant:</strong> ${transaction.amount.toLocaleString(
+        "fr-FR",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )} Fcfa</p>
+      <p><strong>Type:</strong> ${typeText}</p>
       <p><strong>Date:</strong> ${transaction.date}</p>
     `;
     transactionModal.show();
@@ -159,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function deleteTransaction(index) {
     const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
     const transactionToDelete = transactions[index];
-    const confirmationMessage = `Êtes-vous sûr de vouloir supprimer la transaction : ${transactionToDelete.description} ?`;
+    const confirmationMessage = `Êtes-vous sûr de vouloir supprimer cette transaction ?`;
 
     if (confirm(confirmationMessage)) {
       transactions.splice(index, 1);
@@ -171,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
   transactionForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const description = document.getElementById("description").value;
     const amount = document.getElementById("amount").value;
     const type = document.getElementById("type").value;
 
@@ -180,25 +177,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const transaction = new Transaction(description, amount, type);
+    const transaction = new Transaction(amount, type);
     saveTransaction(transaction);
     loadTransactions();
     transactionForm.reset();
   });
 
-  themeToggle.addEventListener("click", function () {
-    if (body.classList.contains("dark-theme")) {
-      body.classList.remove("dark-theme");
-      body.classList.add("light-theme");
-      themeToggle.className = "bi bi-moon";
-    } else {
-      body.classList.remove("light-theme");
-      body.classList.add("dark-theme");
-      themeToggle.className = "bi bi-sun";
-    }
-  });
-
-  // Ajouter un gestionnaire de défilement pour masquer le formulaire
   transactionContainer.addEventListener("scroll", function () {
     if (transactionContainer.scrollTop > 0) {
       transactionForm.classList.add("hidden");
