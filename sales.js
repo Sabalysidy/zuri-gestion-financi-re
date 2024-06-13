@@ -16,13 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function loadSales() {
     const sales = JSON.parse(localStorage.getItem("sales")) || [];
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentSales = sales.slice(startIndex, endIndex);
     salesTableBody.innerHTML = "";
     let totalAmount = 0;
 
-    currentSales.forEach((sale, index) => {
+    sales.forEach((sale, index) => {
       const row = document.createElement("tr");
 
       const imgCell = document.createElement("td");
