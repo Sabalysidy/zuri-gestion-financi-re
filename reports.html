@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapports - Zuri Gestion Financière</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="reports.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link rel="icon" href="img/zuri_market.jpg" type="image/png">
+</head>
+
+<body class="light-theme">
+    <!-- Barre de navigation -->
+    <nav class="container navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Zuri Market</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ventes.html">Ventes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rapports.html">Rapports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">Paramètres</a>
+                </li>
+            </ul>
+            <i id="themeToggle" class="bi bi-moon" style="font-size: 1.5rem; cursor: pointer;"></i>
+        </div>
+    </nav>
+    <hr class="container">
+    <div class="container mt-5">
+        <h2 class="text-center">Rapports</h2>
+        <!-- Exemple d'application dans le HTML -->
+
+        <div id="financialReport" class="frame">
+            <h3>Rapport Financier</h3>
+            <div id="financialTotals" class="financial-totals">
+                <p>Total des Dépôts : <span id="totalDeposits" class="badge badge-depot"></span></p>
+                <p>Total des Retraits : <span id="totalWithdrawals" class="badge badge-retrait"></span></p>
+            </div>
+            <canvas id="financialChart"></canvas>
+        </div>
+
+        <div id="salesReport" class="frame">
+            <h3>Rapport des Ventes</h3>
+            <div id="salesChartContainer">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+
+        <canvas id="financialChart" width="400" height="200" class="mb-4"></canvas>
+        <canvas id="salesChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="theme.js"></script>
+    <script src="reports.js"></script>
+</body>
+
+</html>
